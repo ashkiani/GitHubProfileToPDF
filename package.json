@@ -1,0 +1,19 @@
+{
+  "name": "githubprofiletopdf",
+  "version": "1.0.0",
+  "description": "command-line application that dynamically generates a PDF profile from a GitHub username",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashkiani/GitHubProfileToPDF.git"
+  },
+  "author": "Siavash Ashkiani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ashkiani/GitHubProfileToPDF/issues"
+  },
+  "homepage": "https://github.com/ashkiani/GitHubProfileToPDF#readme"
+}
