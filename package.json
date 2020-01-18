@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/ashkiani/GitHubProfileToPDF/issues"
   },
-  "homepage": "https://github.com/ashkiani/GitHubProfileToPDF#readme"
+  "homepage": "https://github.com/ashkiani/GitHubProfileToPDF#readme",
+  "dependencies": {
+    "inquirer": "^7.0.3"
+  }
 }
