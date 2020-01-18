@@ -2,7 +2,7 @@ const axios = require('axios');
 // const util = require('util');
 // const generate = util.promisify(htmlGenerator);
 async function htmlGenerator(username, backgroundColor) {
-    console.log("htmlGenerator is called");
+    console.log("htmlGenerator is called- username:" + username + " color:" + backgroundColor);
     let newHtml;
     this.username = username;
     const githubUrlRequest = `https://api.github.com/users/${this.username}`;
@@ -11,14 +11,12 @@ async function htmlGenerator(username, backgroundColor) {
         .then(function ({ data }) {
             // handle success
             console.log("API responded");
-            console.log(data);
             newHtml = generateHtml(data, backgroundColor);
         })
         .catch(function (error) {
             // handle error
             console.log(error);
         });
-    console.log("html content inside generator:" + newHtml);
     return newHtml;
 }
 

@@ -2,9 +2,7 @@ const inquirer = require('inquirer');
 const htmlObj = require('./GitHubProfileHtmlGenerator');
 async function start(answers) {
     console.log("Calling html generator");
-    const htmlContent = await htmlObj.getHTML(answers.ussername, answers.color);
-    console.log("html Content:");
-    console.log(htmlContent);
+    const htmlContent = await htmlObj.getHTML(answers.username, answers.color);
     var fs = require('fs'),
         convertFactory = require('electron-html-to');
 
@@ -16,14 +14,12 @@ async function start(answers) {
         if (err) {
             return console.error(err);
         }
-
-        console.log(result.numberOfPages);
-        console.log(result.logs);
-        result.stream.pipe(fs.createWriteStream("./output/" + answers.username + '_GitHubProfile.pdf'));
+        let fileName ="./output/" + answers.username + "_GitHubProfile.pdf";
+        result.stream.pipe(fs.createWriteStream(fileName));
         conversion.kill(); // necessary if you use the electron-server strategy, see bellow for details
+        console.log("PDF file created: " + fileName);
     });
 }
-// start();
 
 inquirer
     .prompt([
