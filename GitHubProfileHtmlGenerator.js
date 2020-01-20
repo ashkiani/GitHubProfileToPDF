@@ -1,35 +1,20 @@
 const axios = require('axios');
-// const util = require('util');
-// const generate = util.promisify(htmlGenerator);
 async function htmlGenerator(username, backgroundColor) {
     console.log("htmlGenerator is called- username:" + username + " color:" + backgroundColor);
     let newHtml;
-    let returnedProfileData;
-    let StarredCount;
-    this.username = username;
-    const githubUrlRequest = `https://api.github.com/users/${this.username}`;
+    
+    const githubUrlRequest = `https://api.github.com/users/${username}`;
     console.log("API URL:" + githubUrlRequest);
-    await axios.get(githubUrlRequest)
-        .then(function ({ data }) {
-            // handle success
-            console.log("API responded");
-            returnedProfileData = data;
-        })
-        .catch(function (error) {
-            // handle error
-            console.log(error);
-        });
-    await axios.get(githubUrlRequest + '/starred')
-        .then(function ({ data }) {
-            // handle success
-            console.log("API responded");
-            StarredCount = data.length;
-        })
-        .catch(function (error) {
-            // handle error
-            console.log(error);
-        });
-    newHtml = generateHtml(returnedProfileData, StarredCount, backgroundColor);
+
+    const promise1 = axios.get(githubUrlRequest);
+    const promise2 = axios.get(githubUrlRequest + '/starred');
+
+    await Promise.all([promise1, promise2]).then(function (values) {
+        let returnedProfileData = values[0].data;
+        let StarredCount = values[1].data.length;
+        newHtml = generateHtml(returnedProfileData, StarredCount, backgroundColor);
+
+    });
     return newHtml;
 }
 
