@@ -4,6 +4,8 @@ const axios = require('axios');
 async function htmlGenerator(username, backgroundColor) {
     console.log("htmlGenerator is called- username:" + username + " color:" + backgroundColor);
     let newHtml;
+    let returnedProfileData;
+    let StarredCount;
     this.username = username;
     const githubUrlRequest = `https://api.github.com/users/${this.username}`;
     console.log("API URL:" + githubUrlRequest);
@@ -11,16 +13,27 @@ async function htmlGenerator(username, backgroundColor) {
         .then(function ({ data }) {
             // handle success
             console.log("API responded");
-            newHtml = generateHtml(data, backgroundColor);
+            returnedProfileData = data;
         })
         .catch(function (error) {
             // handle error
             console.log(error);
         });
+    await axios.get(githubUrlRequest + '/starred')
+        .then(function ({ data }) {
+            // handle success
+            console.log("API responded");
+            StarredCount = data.length;
+        })
+        .catch(function (error) {
+            // handle error
+            console.log(error);
+        });
+    newHtml = generateHtml(returnedProfileData, StarredCount, backgroundColor);
     return newHtml;
 }
 
-function generateHtml(response, backgroundColor) {
+function generateHtml(response, StarredCount, backgroundColor) {
     const htmlContent = `
         <!DOCTYPE html>
         <html lang="en">
@@ -178,7 +191,7 @@ function generateHtml(response, backgroundColor) {
                     </div>
                     <div class="card github-stars">
                         <h1 class="card-margin">GitHub Stars</h1>
-                        <p id="star-count">STARCOUNT</p>
+                        <p id="star-count">${StarredCount}</p>
                     </div>
                     <div class="card following">
                         <h1 class="card-margin">Following</h1>

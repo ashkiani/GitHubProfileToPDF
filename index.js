@@ -14,7 +14,7 @@ async function start(answers) {
         if (err) {
             return console.error(err);
         }
-        let fileName ="./output/" + answers.username + "_GitHubProfile.pdf";
+        let fileName = "./output/" + answers.username + "_GitHubProfile.pdf";
         result.stream.pipe(fs.createWriteStream(fileName));
         conversion.kill(); // necessary if you use the electron-server strategy, see bellow for details
         console.log("PDF file created: " + fileName);
@@ -38,5 +38,4 @@ inquirer
     .then(answers => {
         console.log(answers);
         start(answers);
-
     });
