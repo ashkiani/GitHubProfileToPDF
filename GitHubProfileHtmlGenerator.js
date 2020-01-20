@@ -160,7 +160,7 @@ function generateHtml(response, StarredCount, backgroundColor) {
                     <div class = "header-text name">My name is ${response.name}!</div>
                     <div class = "item5 links">
                         <ul>
-                            
+                        <li id="location" class="link"><a href="https://www.google.com/maps/search/?api=1&${response.location}">${response.location}</a></li>
                         </ul>
                     </div>
                 </header>
